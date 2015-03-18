@@ -49,333 +49,435 @@ func seedTables() error {
     }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 1
-    i.First1 = "kirstine"
-    i.Last1 = "wolfe"
-    i.First2 = "cheryl"
-    i.Last2 = "herrara"
+    i = &Invitee{
+        InviteID: 1,
+        First1:   "kirstine",
+        Last1:    "wolfe",
+        First2:   "cheryl",
+        Last2:    "herrara",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 2
-    i.First1 = "dan"
-    i.Last1 = "livesay"
-    i.First2 = "amanda"
-    i.Last2 = "livesay"
+    i = &Invitee{
+        InviteID: 2,
+        First1:   "dan",
+        Last1:    "livesay",
+        First2:   "amanda",
+        Last2:    "livesay",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 3
-    i.First1 = "farid"
-    i.Last1 = "ansari"
+    i = &Invitee{
+        InviteID: 3,
+        First1:   "farid",
+        Last1:    "ansari",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 4
-    i.First1 = "carolyn"
-    i.Last1 = "apostolides"
-    i.First2 = "john"
-    i.Last2 = "apostolides"
+    i = &Invitee{
+        InviteID: 4,
+        First1:   "carolyn",
+        Last1:    "apostolides",
+        First2:   "john",
+        Last2:    "apostolides",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 5
-    i.First1 = "rob"
-    i.Last1 = "linton"
-    i.First2 = "diana"
-    i.Last2 = "linton"
+    i = &Invitee{
+        InviteID: 5,
+        First1:   "rob",
+        Last1:    "linton",
+        First2:   "diana",
+        Last2:    "linton",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 6
-    i.First1 = "onelia"
-    i.Last1 = "estudillo"
+    i = &Invitee{
+        InviteID: 6,
+        First1:   "onelia",
+        Last1:    "estudillo",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 7
-    i.First1 = "linh"
-    i.Last1 = "forse"
-    i.First2 = "jason"
-    i.Last2 = "forse"
+    i = &Invitee{
+        InviteID: 7,
+        First1:   "linh",
+        Last1:    "forse",
+        First2:   "jason",
+        Last2:    "forse",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 8
-    i.First1 = "dorothy"
-    i.Last1 = "bednar"
-    i.First2 = "jeremy"
-    i.Last2 = "bednar"
+    i = &Invitee{
+        InviteID: 8,
+        First1:   "dorothy",
+        Last1:    "bednar",
+        First2:   "jeremy",
+        Last2:    "bednar",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 9
-    i.First1 = "julie"
-    i.Last1 = "jeanes"
-    i.First2 = "nathan"
-    i.Last2 = "jeanes"
+    i = &Invitee{
+        InviteID: 9,
+        First1:   "julie",
+        Last1:    "jeanes",
+        First2:   "nathan",
+        Last2:    "jeanes",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 10
-    i.First1 = "patrick"
-    i.Last1 = "schleck"
+    i = &Invitee{
+        InviteID: 10,
+        First1:   "patrick",
+        Last1:    "schleck",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 11
-    i.First1 = "katie"
-    i.Last1 = "picone"
+    i = &Invitee{
+        InviteID: 11,
+        First1:   "katie",
+        Last1:    "picone",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 12
-    i.First1 = "shih-yi"
-    i.Last1 = "kim"
+    i = &Invitee{
+        InviteID: 12,
+        First1:   "shih-yi",
+        Last1:    "kim",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 13
-    i.First1 = "maricel"
-    i.Last1 = "fong"
+    i = &Invitee{
+        InviteID: 13,
+        First1:   "maricel",
+        Last1:    "fong",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 14
-    i.First1 = "esther"
-    i.Last1 = "jeong"
+    i = &Invitee{
+        InviteID: 14,
+        First1:   "esther",
+        Last1:    "jeong",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 15
-    i.First1 = "jeana"
-    i.Last1 = "yi"
+    i = &Invitee{
+        InviteID: 15,
+        First1:   "jeana",
+        Last1:    "yi",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 16
-    i.First1 = "billie"
-    i.Last1 = "wilson"
-    i.First2 = "jon"
-    i.Last2 = "wilson"
+    i = &Invitee{
+        InviteID: 16,
+        First1:   "billie",
+        Last1:    "wilson",
+        First2:   "jon",
+        Last2:    "wilson",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 17
-    i.First1 = "leslie"
-    i.Last1 = "yeung"
-    i.First2 = "karl"
-    i.Last2 = "thoennessen"
+    i = &Invitee{
+        InviteID: 17,
+        First1:   "leslie",
+        Last1:    "yeung",
+        First2:   "karl",
+        Last2:    "thoennessen",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 18
-    i.First1 = "suprat"
-    i.Last1 = "wilson"
-    i.First2 = "scott"
-    i.Last2 = "wilson"
+    i = &Invitee{
+        InviteID: 18,
+        First1:   "suprat",
+        Last1:    "wilson",
+        First2:   "scott",
+        Last2:    "wilson",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 19
-    i.First1 = "chris"
-    i.Last1 = "falkiewicz"
-    i.First2 = "kari"
-    i.Last2 = "falkiewicz"
+    i = &Invitee{
+        InviteID: 19,
+        First1:   "chris",
+        Last1:    "falkiewicz",
+        First2:   "kari",
+        Last2:    "falkiewicz",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 20
-    i.First1 = "chad"
-    i.Last1 = "richardson"
-    i.First2 = "janice"
-    i.Last2 = "richardson"
+    i = &Invitee{
+        InviteID: 20,
+        First1:   "chad",
+        Last1:    "richardson",
+        First2:   "janice",
+        Last2:    "richardson",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 21
-    i.First1 = "bob"
-    i.Last1 = "schuck"
-    i.First2 = "brittany"
-    i.Last2 = "wright"
+    i = &Invitee{
+        InviteID: 21,
+        First1:   "bob",
+        Last1:    "schuck",
+        First2:   "brittany",
+        Last2:    "wright",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 22
-    i.First1 = "sabrina"
-    i.Last1 = "meyers"
-    i.First2 = "stacey"
-    i.Last2 = "meyers"
+    i = &Invitee{
+        InviteID: 22,
+        First1:   "sabrina",
+        Last1:    "meyers",
+        First2:   "stacey",
+        Last2:    "meyers",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 23
-    i.First1 = "lynn"
-    i.Last1 = "meyers"
-    i.First2 = "sandy"
-    i.Last2 = "meyers"
+    i = &Invitee{
+        InviteID: 23,
+        First1:   "lynn",
+        Last1:    "meyers",
+        First2:   "sandy",
+        Last2:    "meyers",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 24
-    i.First1 = "christine"
-    i.Last1 = "young"
-    i.First2 = "danny"
-    i.Last2 = "young"
+    i = &Invitee{
+        InviteID: 24,
+        First1:   "christine",
+        Last1:    "young",
+        First2:   "danny",
+        Last2:    "young",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 25
-    i.First1 = "tiffany"
-    i.Last1 = "cereghino"
-    i.First2 = "chris"
-    i.Last2 = "cereghino"
+    i = &Invitee{
+        InviteID: 25,
+        First1:   "tiffany",
+        Last1:    "cereghino",
+        First2:   "chris",
+        Last2:    "cereghino",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 26
-    i.First1 = "scott"
-    i.Last1 = "caston"
-    i.First2 = "lauren"
-    i.Last2 = "caston"
+    i = &Invitee{
+        InviteID: 26,
+        First1:   "scott",
+        Last1:    "caston",
+        First2:   "lauren",
+        Last2:    "caston",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 27
-    i.First1 = "megan"
-    i.Last1 = "thomas"
+    i = &Invitee{
+        InviteID: 27,
+        First1:   "megan",
+        Last1:    "thomas",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 28
-    i.First1 = "ha"
-    i.Last1 = "nguyen"
-    i.First2 = "joe"
-    i.Last2 = "nguyen"
+    i = &Invitee{
+        InviteID: 28,
+        First1:   "ha",
+        Last1:    "nguyen",
+        First2:   "joe",
+        Last2:    "nguyen",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 29
-    i.First1 = "wendy"
-    i.Last1 = "lau"
-    i.First2 = "ben"
-    i.Last2 = "lau"
+    i = &Invitee{
+        InviteID: 29,
+        First1:   "wendy",
+        Last1:    "lau",
+        First2:   "ben",
+        Last2:    "lau",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 30
-    i.First1 = "peter"
-    i.Last1 = "cho"
-    i.First2 = "young"
-    i.Last2 = "cho"
+    i = &Invitee{
+        InviteID: 30,
+        First1:   "peter",
+        Last1:    "cho",
+        First2:   "young",
+        Last2:    "cho",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 31
-    i.First1 = "donnie"
-    i.Last1 = "demuth"
-    i.First2 = "suprina"
-    i.Last2 = "dorai"
+    i = &Invitee{
+        InviteID: 31,
+        First1:   "donnie",
+        Last1:    "demuth",
+        First2:   "suprina",
+        Last2:    "dorai",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 32
-    i.First1 = "jorgina"
-    i.Last1 = "hall"
-    i.First2 = "michael"
-    i.Last2 = "hall"
+    i = &Invitee{
+        InviteID: 32,
+        First1:   "jorgina",
+        Last1:    "hall",
+        First2:   "michael",
+        Last2:    "hall",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 33
-    i.First1 = "marella"
-    i.Last1 = "bigcas"
-    i.First2 = "jo-lawrence"
-    i.Last2 = "bigcas"
+    i = &Invitee{
+        InviteID: 33,
+        First1:   "marella",
+        Last1:    "bigcas",
+        First2:   "jo-lawrence",
+        Last2:    "bigcas",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 34
-    i.First1 = "jenny"
-    i.Last1 = "mun"
+    i = &Invitee{
+        InviteID: 34,
+        First1:   "jenny",
+        Last1:    "mun",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 35
-    i.First1 = "mary"
-    i.Last1 = "an"
+    i = &Invitee{
+        InviteID: 35,
+        First1:   "mary",
+        Last1:    "an",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 36
-    i.First1 = "anna"
-    i.Last1 = "brown"
-    i.First2 = "jason"
-    i.Last2 = "brown"
+    i = &Invitee{
+        InviteID: 36,
+        First1:   "anna",
+        Last1:    "brown",
+        First2:   "jason",
+        Last2:    "brown",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 37
-    i.First1 = "brianna"
-    i.Last1 = "graber"
-    i.First2 = "chris"
-    i.Last2 = "graber"
+    i = &Invitee{
+        InviteID: 37,
+        First1:   "brianna",
+        Last1:    "graber",
+        First2:   "chris",
+        Last2:    "graber",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 38
-    i.First1 = "becky"
-    i.Last1 = "malcolm"
-    i.First2 = "mike"
-    i.Last2 = "malcolm"
+    i = &Invitee{
+        InviteID: 38,
+        First1:   "becky",
+        Last1:    "malcolm",
+        First2:   "mike",
+        Last2:    "malcolm",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 39
-    i.First1 = "erica"
-    i.Last1 = "shalenberg"
-    i.First2 = "eli"
-    i.Last2 = "shalenberg"
+    i = &Invitee{
+        InviteID: 39,
+        First1:   "erica",
+        Last1:    "shalenberg",
+        First2:   "eli",
+        Last2:    "shalenberg",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 40
-    i.First1 = "luis"
-    i.Last1 = "ocegueda"
+    i = &Invitee{
+        InviteID: 40,
+        First1:   "luis",
+        Last1:    "ocegueda",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 41
-    i.First1 = "keith"
-    i.Last1 = "smith"
-    i.First2 = "katherine"
-    i.Last2 = "hartvickson"
+    i = &Invitee{
+        InviteID: 41,
+        First1:   "keith",
+        Last1:    "smith",
+        First2:   "katherine",
+        Last2:    "hartvickson",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 42
-    i.First1 = "gail"
-    i.Last1 = "henry"
+    i = &Invitee{
+        InviteID: 42,
+        First1:   "gail",
+        Last1:    "henry",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 43
-    i.First1 = "michael"
-    i.Last1 = "smith"
-    i.First2 = "liz"
-    i.Last2 = "cornelissen"
+    i = &Invitee{
+        InviteID: 43,
+        First1:   "michael",
+        Last1:    "smith",
+        First2:   "liz",
+        Last2:    "cornelissen",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 44
-    i.First1 = "kevin"
-    i.Last1 = "smith"
-    i.First2 = "luz"
-    i.Last2 = "montesclaros"
+    i = &Invitee{
+        InviteID: 44,
+        First1:   "kevin",
+        Last1:    "smith",
+        First2:   "luz",
+        Last2:    "montesclaros",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 45
-    i.First1 = "kc"
-    i.Last1 = "smith"
-    i.First2 = "jake"
-    i.Last2 = "dewitt"
+    i = &Invitee{
+        InviteID: 45,
+        First1:   "kc",
+        Last1:    "smith",
+        First2:   "jake",
+        Last2:    "dewitt",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 46
-    i.First1 = "daniel"
-    i.Last1 = "lieras"
+    i = &Invitee{
+        InviteID: 46,
+        First1:   "daniel",
+        Last1:    "lieras",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 47
-    i.First1 = "david"
-    i.Last1 = "henry"
-    i.First2 = "darryl"
-    i.Last2 = "henry"
+    i = &Invitee{
+        InviteID: 47,
+        First1:   "david",
+        Last1:    "henry",
+        First2:   "darryl",
+        Last2:    "henry",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 48
-    i.First1 = "dave"
-    i.Last1 = "henry"
-    i.First2 = "alora"
-    i.Last2 = "henry"
+    i = &Invitee{
+        InviteID: 48,
+        First1:   "dave",
+        Last1:    "henry",
+        First2:   "alora",
+        Last2:    "henry",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 49
-    i.First1 = "kevin"
-    i.Last1 = "tran"
-    i.First2 = "alyssa"
-    i.Last2 = "fumar"
+    i = &Invitee{
+        InviteID: 49,
+        First1:   "kevin",
+        Last1:    "tran",
+        First2:   "alyssa",
+        Last2:    "fumar",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 50
-    i.First1 = "heather"
-    i.Last1 = "brown"
-    i.First2 = "richard"
-    i.Last2 = "brown"
+    i = &Invitee{
+        InviteID: 50,
+        First1:   "heather",
+        Last1:    "brown",
+        First2:   "richard",
+        Last2:    "brown",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
-    i.InviteID = 51
-    i.First1 = "lee"
-    i.Last1 = "hartvickson"
-    i.First2 = "cameryn"
-    i.Last2 = "hartvickson"
+    i = &Invitee{
+        InviteID: 51,
+        First1:   "lee",
+        Last1:    "hartvickson",
+        First2:   "cameryn",
+        Last2:    "hartvickson",
+    }
     db.Create(&i)
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.InviteID)
 
