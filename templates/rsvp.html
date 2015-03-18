@@ -52,15 +52,19 @@
             <div class="form-group">
                 <input type="text" name="Recipient.EmailAddr.Address" id="email" size="30" value="" placeholder="Confirmation Email" class="text-input form-control" />
             </div>
+        {{ else if .Recipient.NoGuest }}
+            <div class="form-group">
+                <input type="text" name="Recipient.EmailAddr.Address" id="email" size="30" value="" placeholder="Confirmation Email" class="text-input form-control" />
+            </div>
         {{ else }}
             <div id="guestForm" style="display:none">
                 <div class="form-group">
-                    <input type="text" id="guestFirst" name="Recipient.Date.First" size="30" value="" placeholder="First Name" class="text-input form-control" />
+                    <input type="text" id="guestFirst" name="Recipient.Date.First" size="30" value="" placeholder="Guest First Name" class="text-input form-control" />
                     <label class="error" for="Recipient.Date.First" id="gFirst-error">Please provide your guest first name.</label>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" id="guestLast" name="Recipient.Date.Last" size="30" value="" placeholder="Last Name" class="text-input form-control" />
+                    <input type="text" id="guestLast" name="Recipient.Date.Last" size="30" value="" placeholder="Guest Last Name" class="text-input form-control" />
                     <label class="error" for="Recipient.Date.Last" id="gLast-error">Please provide your guest last name.</label>
                 </div>
 

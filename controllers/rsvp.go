@@ -53,6 +53,12 @@ func Respondez(w http.ResponseWriter, r *http.Request) {
         if invitee.First2 != "" {
             invitee.First2 = FullName(invitee.First2, invitee.Last2)
         }
+        // Hack for our couple NO guest peeps
+        if invitee.InviteID == 34 || invitee.InviteID == 35 {
+            invitee.NoGuest = true
+        } else {
+            invitee.NoGuest = false
+        }
         rsvp := &RSVP{
             Recipient: *invitee,
             HMAC:      n,
@@ -137,7 +143,7 @@ func RSVP_Reply(w http.ResponseWriter, r *http.Request) {
             rsvp.Recipient.EmailAddr.Type = "confirm"
         }
         // Force Guest to be empty if one isn't provided
-        if rsvp.Recipient.Date.First == "" {
+        if rsvp.Recipient.Date != nil && rsvp.Recipient.Date.First == "" {
             rsvp.Recipient.Date = nil
         }
         // Verify that the POST is legal
