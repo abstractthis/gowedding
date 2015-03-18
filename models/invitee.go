@@ -13,6 +13,7 @@ type Invitee struct {
     IsAttending2  bool
     EmailAddr     *Email
     Date          *Guest
+    NoGuest       bool   `sql:"-"`
 }
 
 func GetInvitee(i *Invitee) error {
@@ -30,7 +31,7 @@ func SetInviteeID(i *Invitee) error {
         First1:   i.First1,
         Last1:    i.Last1,
     }
-    err := db.Where("invite_id=? and first1=? and last1=?",
+    err := db.Select("id").Where("invite_id=? and first1=? and last1=?",
         tmp.InviteID, tmp.First1, tmp.Last1).Find(&tmp).Error
     if err != nil {
         return err
