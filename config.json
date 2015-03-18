@@ -1,0 +1,5 @@
+{
+    "api_url" : "localhost:9023",
+    "dbpath" : "wedding.db",
+    "is_dev" : true
+}

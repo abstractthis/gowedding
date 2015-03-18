@@ -1,0 +1,91 @@
+<form name="rsvp-reply" method="post" action="/rsvp/reply/" class="af-form" id="rsvp-reply">
+    <div class="col-lg-4 col-lg-offset-4">
+        <input type="hidden" name="Recipient.InviteID" value="{{.Recipient.InviteID}}" />
+        <input type="hidden" name="HMAC.Hash" value="{{.HMAC.Hash}}" />
+        <input type="hidden" name="HMAC.Stamp" value="{{.HMAC.Stamp}}" />
+        <div class="form-group">
+            <input type="text" name="Recipient.First1" id="first1" size="30" value="{{.Recipient.First1}}" placeholder="Name" class="text-input form-control" readonly="true" />
+        </div>
+
+        <div class="form-group">
+            <select id="attending1" class="form-control" name="Recipient.IsAttending1">
+                <option value="-1">Will celebrate?</option>
+                <option value="1">Celebrate in Person</option>
+                <option value="0">Celebrate in Spirit</option>
+            </select>
+            <label id="attending1-error" for="Recipient.IsAttending1" class="error">Please select an attendance option.</label>
+        </div>
+
+        <div id="food1Box" class="form-group" style="display:none">
+            <select id="food1" class="form-control" name="Recipient.Food1">
+                <option value="-1">Dinner selection?</option>
+                <option value="beef">Dinner is Beef</option>
+                <option value="fish">Dinner is Fish</option>
+                <option value="veggie">Dinner is Vegetarian</option>
+            </select>
+            <label id="food1-error" for="Recipient.Food1" class="error">Please select your dinner choice.</label>
+        </div>
+        {{ if .Recipient.First2 }}
+            <div class="form-group">
+                <input type="text" name="Recipient.First2" id="first2" size="30" value="{{.Recipient.First2}}" placeholder="Name" class="text-input form-control" readonly="true"/>
+            </div>
+            
+            <div class="form-group">
+                <select id="attending2" class="form-control" name="Recipient.IsAttending2">
+                    <option value="-1">Will celebrate?</option>
+                    <option value="1">Celebrate in Person</option>
+                    <option value="0">Celebrate in Spirit</option>
+                </select>
+                <label id="attending2-error" for="Recipient.IsAttending2" class="error">Please select an attendance option.</label>
+            </div>
+
+            <div id="food2Box" class="form-group" style="display:none">
+                <select id="food2" class="form-control" name="Recipient.Food2">
+                    <option value="-1">Dinner selection?</option>
+                    <option value="beef">Dinner is Beef</option>
+                    <option value="fish">Dinner is Fish</option>
+                    <option value="veggie">Dinner is Vegetarian</option>
+                </select>
+                <label id="food2-error" for="Recipient.Food2" class="error">Please select your dinner choice.</label>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="Recipient.EmailAddr.Address" id="email" size="30" value="" placeholder="Confirmation Email" class="text-input form-control" />
+            </div>
+        {{ else }}
+            <div id="guestForm" style="display:none">
+                <div class="form-group">
+                    <input type="text" id="guestFirst" name="Recipient.Date.First" size="30" value="" placeholder="First Name" class="text-input form-control" />
+                    <label class="error" for="Recipient.Date.First" id="gFirst-error">Please provide your guest first name.</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="guestLast" name="Recipient.Date.Last" size="30" value="" placeholder="Last Name" class="text-input form-control" />
+                    <label class="error" for="Recipient.Date.Last" id="gLast-error">Please provide your guest last name.</label>
+                </div>
+
+                <div class="form-group">
+                    <select id="guestFood" class="form-control" name="Recipient.Date.Food">
+                        <option value="-1">Dinner selection?</option>
+                        <option value="beef">Dinner is Beef</option>
+                        <option value="fish">Dinner is Fish</option>
+                        <option value="veggie">Dinner is Vegetarian</option>
+                    </select>
+                    <label id="gFood-error" for="Recipient.Date.Food" class="error">Please select your guests dinner choice.</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="Recipient.EmailAddr.Address" id="email" size="30" value="" placeholder="Confirmation Email" class="text-input form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="button" class="form-button btn btn-primary form-control" id="add-guest-btn" value="Add Guest" />
+            </div>
+        {{ end }}
+          
+        <div class="form-group af-outer af-required">
+            <input type="submit" name="submit" class="form-button btn btn-primary form-control" id="reply-submit-btn" value="RSVP" />
+        </div>
+    </div>
+</form>
