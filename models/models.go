@@ -21,7 +21,7 @@ func Initialize() error {
         Logger.Println(err)
         return err
     }
-    db.LogMode(true)
+    db.LogMode(config.Conf.IsDev)
     db.SetLogger(Logger)
 
     // If the file doesn't exist create it and build out DB
