@@ -4,6 +4,8 @@
 	
     $(document).ready(function(){
 
+    	$(".error").hide();
+
 		jQuery('#countdown_dashboard').countDown({
 				targetDate: {
 					'day': 		23, // Put the date here
@@ -28,27 +30,30 @@
 		var validateRSVPLookup = function() {
 			var valid = true;
 			// Make sure that RSVP ID provided and a number
-			var id = $("#rsvpId").val();
+			var id = $.trim($("#rsvpId").val());
 			if (!!id && intRegex.test(id)) {
 				$("#rsvpId-error").hide();
+				$("#rsvpId").val(id);
 			}
 			else {
 				$("#rsvpId-error").show();
 				valid = false;
 			}
 			// Make sure first name provided
-			var firstName = $("#first1").val();
+			var firstName = $.trim($("#first1").val());
 			if (!!firstName) {
 				$("#first1-error").hide();
+				$("#first1").val(firstName);
 			}
 			else {
 				$("#first1-error").show();
 				valid = false;
 			}
 			// Make sure last name provided
-			var lastName = $("#last1").val();
+			var lastName = $.trim($("#last1").val());
 			if (!!lastName) {
 				$("#last1-error").hide();
+				$("#last1").val(lastName);
 			}
 			else {
 				$("#last1-error").show();
@@ -86,18 +91,20 @@
 			if (!$("#guestForm").is(":visible")) return valid;
 			// Make sure first name provided
 			// Make sure first name provided
-			var firstName = $("#guestFirst").val();
+			var firstName = $.trim($("#guestFirst").val());
 			if (!!firstName) {
 				$("#gFirst-error").hide();
+				$("#guestFirst").val(firstName);
 			}
 			else {
 				$("#gFirst-error").show();
 				valid = false;
 			}
 			// Make sure last name provided
-			var lastName = $("#guestLast").val();
+			var lastName = $.trim($("#guestLast").val());
 			if (!!lastName) {
 				$("#gLast-error").hide();
+				$("#guestLast").val(lastName);
 			}
 			else {
 				$("#gLast-error").show();
@@ -149,25 +156,34 @@
 			$.ajax({
 				url: rsvpURL,
 				type: "GET",
-				cache: false
+				cache: false,
+				timeout: 5000
 			}).done(function(data, textStatus, jqXHR) {
 				var errHeader = $("#rsvpwrap h3");
 				if (errHeader.length) {
 					errHeader.remove();
 				}
-				$("#rsvpwrap form").replaceWith(data);
-				$(".error").hide();
+				if (!!jqXHR.responseText) {
+					$("#rsvpwrap form").replaceWith(data);
+					$(".error").hide();
+				}
+				else {
+					$("#rsvpwrap form").replaceWith("<h3>Doh! It seems the gremlins have done something. The server has vanished. Please come back later and try again. Worst-case snail mail wins.</h3>");
+				}
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				var errHeader = $("#rsvpwrap h3");
 				if (errHeader.length) {
 					errHeader.remove();
 				}
-				$("#rsvpwrap form").replaceWith(jqXHR.responseText);
-				$(".error").hide();
+				if (!!jqXHR.responseText) {
+					$("#rsvpwrap form").replaceWith(jqXHR.responseText);
+					$(".error").hide();
+				}
+				else {
+					$("#rsvpwrap form").replaceWith("<h3>Doh! It seems the gremlins have done something. The server has vanished. Please come back later and try again. Worst-case snail mail wins.</h3>");
+				}
 			});
 		};
-
-		$(".error").hide();
 
 		$("#rsvpwrap").on("change", "select", function(e) {
 			var selectBox = $(e.target);
@@ -255,17 +271,28 @@
 				url: form.attr("action"),
 				type: form.attr("method"),
 				cache: false,
-				data: postData
+				data: postData,
+				timeout: 5000
 			}).done(function(data, textStatus, jqXHR) {
 				var rsvpFormURL = jqXHR.getResponseHeader("Location");
-				getRSVPForm(rsvpFormURL);
+				if (!!rsvpFormURL) {
+					getRSVPForm(rsvpFormURL);
+				}
+				else {
+					$("#rsvpwrap form").replaceWith("<h3>Doh! It seems the gremlins have done something. The server has vanished. Please come back later and try again. Worst-case snail mail wins.</h3>");
+				}
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				var errHeader = $("#rsvpwrap h3");
 				if (errHeader.length) {
 					errHeader.remove();
 				}
-				$("#rsvpwrap form").replaceWith(jqXHR.responseText);
-				$(".error").hide();
+				if (!!jqXHR.responseText) {
+					$("#rsvpwrap form").replaceWith(jqXHR.responseText);
+					$(".error").hide();
+				}
+				else {
+					$("#rsvpwrap form").replaceWith("<h3>Doh! It seems the gremlins have done something. The server has vanished. Please come back later and try again. Worst-case snail mail wins.</h3>");
+				}
 			});
 		});
 
@@ -280,20 +307,32 @@
 				url: form.attr("action"),
 				type: form.attr("method"),
 				cache: false,
-				data: postData
+				data: postData,
+				timeout: 5000
 			}).done(function(data, textStatus, jqXHR) {
 				var errHeader = $("#rsvpwrap h3");
 				if (errHeader.length) {
 					errHeader.remove();
 				}
-				$("#rsvpwrap form").replaceWith("<h1>Thank you for taking the time to RSVP!</h1>");
+				if (jqXHR.status === 200) {
+					$("#rsvpwrap form").replaceWith("<h1>Thank you for taking the time to RSVP!</h1>");
+					$("a[href='#rsvp']").trigger("click");
+				}
+				else {
+					$("#rsvpwrap form").replaceWith("<h3>Doh! It seems the gremlins have done something. Please come back later and try again. Worst-case snail mail wins.</h3>");
+				}
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				var errHeader = $("#rsvpwrap h3");
 				if (errHeader.length) {
 					errHeader.remove();
 				}
-				$("#rsvpwrap form").replaceWith(jqXHR.responseText);
-				$(".error").hide();
+				if (!!jqXHR.responseText) {
+					$("#rsvpwrap form").replaceWith(jqXHR.responseText);
+					$(".error").hide();
+				}
+				else {
+					$("#rsvpwrap form").replaceWith("<h3>Doh! It seems the gremlins have done something. The server has vanished. Please come back later and try again. Worst-case snail mail wins.</h3>");
+				}
 			});
 		});
 
