@@ -908,11 +908,6 @@ margin: 0 0 10px;
     background-size: cover;
 }
 
-#rsvpwrap h2 {
-	color: #ffffff;
-}
-
-
 input[type="text"].form-control, input[type="email"].form-control, textarea.form-control, select.form-control{
 	background:none;
 	border-radius:0;
