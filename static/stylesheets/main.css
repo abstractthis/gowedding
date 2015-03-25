@@ -908,6 +908,16 @@ margin: 0 0 10px;
     background-size: cover;
 }
 
+.pagination {
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+#rsvpwrap .guestError {
+	color: #F00;
+	font-weight:bold;
+}
+
 input[type="text"].form-control, input[type="email"].form-control, textarea.form-control, select.form-control{
 	background:none;
 	border-radius:0;
@@ -932,20 +942,7 @@ border-radius: 0;
 border-bottom: 3px solid #464D9C;
 }
 
-#add-guest-btn {
-	border-radius: 0;
-	background-color: #de675f;
-	border: 1px solid #d46a6a;
-	border-bottom: 2px solid #98231a;
-}
-
-#add-guest-btn:hover {
-	background-color: #d46a6a;
-	border: 1px solid #de675f;
-	border-bottom: 2px solid #801515;
-}
-
-#add-guest-btn:focus, #reply-submit-btn:focus, #start-rsvp-btn:focus {
+#reply-submit-btn:focus, #start-rsvp-btn:focus {
 	outline: 0;
 }
 

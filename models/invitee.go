@@ -25,6 +25,19 @@ func GetInvitee(i *Invitee) error {
     return err
 }
 
+func GetInviteeByID(id int) (Invitee, error) {
+    i := Invitee{}
+    err := db.Where("id=?",id).Find(&i).Error
+    if err != nil {
+        Logger.Println(err)
+    }
+    err = db.Model(&i).Related(i.Date).Error
+    if err != nil {
+        Logger.Println(err)
+    }
+    return i, err
+}
+
 func SetInviteeID(i *Invitee) error {
     tmp := Invitee{
         InviteID: i.InviteID,

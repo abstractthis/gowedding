@@ -27,7 +27,8 @@ func Initialize() error {
     // If the file doesn't exist create it and build out DB
     if _, err := os.Stat(config.Conf.DBPath); os.IsNotExist(err) {
         Logger.Printf("Database not found... creating db at %s\n", config.Conf.DBPath)
-        db.CreateTable(&Invitee{})
+        // db.CreateTable(&Invitee{})
+        db.CreateTable(&Invite{})
         db.CreateTable(&Guest{})
         db.CreateTable(&Nonce{})
         db.CreateTable(&Email{})
@@ -39,6 +40,19 @@ func Initialize() error {
 }
 
 func seedTables() error {
+    Logger.Print("Building out tables...")
+    i := &Invite{
+        ID:     2323,
+        Guests: []Guest{
+            {First: "david", Last: "smith", IsAttending: false,},
+            {First: "duong", Last: "nguyen", IsAttending: false,},
+        },
+    }
+    err := db.Create(&i).Error
+    return err
+}
+
+func seedTables1() error {
     Logger.Print("Building out tables...")
     i := &Invitee{
         InviteID: 2323,

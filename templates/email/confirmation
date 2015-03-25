@@ -1,0 +1,15 @@
+Thank you for taking the time to RSVP for Duong and David's Wedding. The
+following is the reservation information provided:
+
+Name: {{ .First1 }} {{ .Last1 }}
+Will be there: {{ if .IsAttending1 }}In Person{{ else }}In Spirit{{ end }}
+{{ if .IsAttending1 }}Dinner selection: {{ .Food1 }}{{ end }}
+
+Name: {{ if .First2 }}{{ .First2 }} {{ .Last2 }}{{ end }}{{ if .Date }}{{ .Date.First }} {{ .Date.Last }}{{ end }}
+Will be there: {{ if .IsAttending2 }}In Person{{ else }}{{ if .Date }}In Person{{ else }}In Spirit{{ end }}{{ end }}
+{{ if .IsAttending2 }}Dinner selection: {{ .Food2 }}{{ else }}{{ if .Date }}Dinner selection: {{ .Date.Food }}{{ end }}{{ end }}
+
+{{ if .IsAttending1 }}We look forward to celebrating with you!{{ else if .IsAttending2 }}We look forward to celebrating with you!{{ else }}We're sorry that you can't make it.{{ end }}
+
+Best,
+Duong and David

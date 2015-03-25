@@ -1,5 +1,11 @@
 {
     "api_url" : "localhost:9023",
-    "dbpath" : "wedding.db",
+    "dbpath" : "wedding2.db",
+    "smtp" : {
+        "host" : "smtp.gmail.com",
+        "port" : "587",
+        "user" : "duonganddave@gmail.com",
+        "pass" : "23evilSneeze!"
+    },
     "is_dev" : true
 }

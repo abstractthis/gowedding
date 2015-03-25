@@ -45,6 +45,7 @@ func GetNonceByPath(idStr string, first string, last string, hash string, stamp 
     n := Nonce{}
     id, err := strconv.Atoi(idStr)
     if err != nil {
+        Logger.Println("Failed to convert invite id!")
         return n, err
     }
     i := Invitee{
@@ -54,26 +55,31 @@ func GetNonceByPath(idStr string, first string, last string, hash string, stamp 
     }
     ts, err := strconv.ParseInt(stamp, 10, 64)
     if err != nil {
+        Logger.Println("Failed to parse nonce timestamp!")
         return n, err
     }
     n.Hash = hash
     n.Stamp = ts
     err = GetNonce(&i, &n)
     if err != nil {
+        Logger.Printf("HMAC 404 for [%s,%s,%s,%s,%s]\n", idStr, first, last, hash, stamp)
         return n, err
     }
     return n, nil
 }
 
-func CreateNonce(i *Invitee) (Nonce, error) {
+func CreateNonce(g *Guest) (Nonce, error) {
     // Get the timestamp (only sec resolution)
     ts := time.Now().Unix()
-    hash := calcNonceHash(i.InviteID, i.First1, i.Last1, ts)
+    hash := calcNonceHash(g.InviteID, g.First, g.Last, ts)
     n := Nonce{
         Hash:  hash,
         Stamp: ts,
     }
     err := db.Create(&n).Error
+    if err != nil {
+        Logger.Printf("Failed to create HMAC for Guest! %v\n", err)
+    }
     return n, err
 }
 
