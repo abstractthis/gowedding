@@ -7,7 +7,6 @@ import (
     "net/http"
     "encoding/json"
     "unicode"
-    "strings"
     "html/template"
 )
 
@@ -70,12 +69,10 @@ func FirstLetterUpper(str string) string {
 }
 
 func FullName(first string, last string) string {
+    if first == "" && last == "" {
+        return ""
+    }
     first = FirstLetterUpper(first)
     last = FirstLetterUpper(last)
     return first + " " + last
-}
-
-func NormalizeFullName(full string) (string, string) {
-    split := strings.Fields(full)
-    return strings.ToLower(split[0]), strings.ToLower(split[1])
 }

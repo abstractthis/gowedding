@@ -24,8 +24,8 @@ func Respondez(w http.ResponseWriter, r *http.Request) {
     case r.Method == "GET":
         pathVars := mux.Vars(r)
         id := pathVars["id"]
-        firstName := pathVars["first"]
-        lastName := pathVars["last"]
+        firstName, _ := url.QueryUnescape(pathVars["first"])
+        lastName, _ := url.QueryUnescape(pathVars["last"])
         nonce := pathVars["nonce"]
         stamp := pathVars["stamp"]
         // Check for a valid nonce
@@ -98,59 +98,41 @@ func sum(x, y int) int {
 func RSVP_Reply(w http.ResponseWriter, r *http.Request) {
     switch {
     case r.Method == "POST":
-        Logger.Println("POSTing RSVP Reply")
         // Parse the form data
-    //     err := r.ParseForm()
-    //     if err != nil {
-    //         Logger.Println(err)
-    //         Logger.Println("Failed to parse RSVP Reply POST form!")
-    //         ErrorResponseWithPayload(w, http.StatusBadRequest)
-    //         return
-    //     }
-    //     // marshal the form data into the struct
-    //     rsvp := new(RSVP)
-    //     err = formDecoder.Decode(rsvp, r.PostForm)
-    //     if err != nil {
-    //         Logger.Println(err)
-    //         Logger.Println("Failed to marshal RSVP Reply POST form!")
-    //         ErrorResponseWithPayload(w, http.StatusBadRequest)
-    //         return
-    //     }
-    //     // Need to parse and normalize the names
-    //     first, last := NormalizeFullName(rsvp.Recipient.First1)
-    //     rsvp.Recipient.First1 = first
-    //     rsvp.Recipient.Last1 = last
-    //     if rsvp.Recipient.First2 != "" {
-    //         first, last = NormalizeFullName(rsvp.Recipient.First2)
-    //         rsvp.Recipient.First2 = first
-    //         rsvp.Recipient.Last2 = last
-    //     }
-    //     // Set email type if address provided
-    //     if rsvp.Recipient.EmailAddr.Address == "" {
-    //         rsvp.Recipient.EmailAddr = nil
-    //     } else {
-    //         rsvp.Recipient.EmailAddr.Type = "confirm"
-    //     }
-    //     // Force Guest to be empty if one isn't provided
-    //     if rsvp.Recipient.Date != nil && rsvp.Recipient.Date.First == "" {
-    //         rsvp.Recipient.Date = nil
-    //     }
-    //     // Verify that the POST is legal
-    //     err = models.GetNonce(&rsvp.Recipient, &rsvp.HMAC)
-    //     if err != nil {
-    //         Logger.Println(err)
-    //         Logger.Println("HMAC 404!")
-    //         ErrorResponseWithPayload(w, http.StatusBadRequest)
-    //         return
-    //     }
-    //     // Store the rsvp reply
-    //     err = models.UpdateRSVP(&rsvp.Recipient, &rsvp.HMAC)
-    //     if err != nil {
-    //         Logger.Println(err)
-    //         Logger.Println("Failed to update rsvp!")
-    //         ErrorResponseWithPayload(w, http.StatusInternalServerError)
-    //         return
-    //     }
-    //     CodeResponse(w, http.StatusOK)
+        err := r.ParseForm()
+        if err != nil {
+            Logger.Printf("Failed to parse RSVP Reply POST form! --> %v\n", err)
+            ErrorResponseWithPayload(w, http.StatusBadRequest)
+            return
+        }
+        // marshal the form data into the struct
+        rsvp := new(RSVP)
+        err = formDecoder.Decode(rsvp, r.PostForm)
+        if err != nil {
+            Logger.Printf("Failed to marshal RSVP Reply POST form! --> %v\n", err)
+            ErrorResponseWithPayload(w, http.StatusBadRequest)
+            return
+        }
+        // Handle the guests
+        for i, _ := range rsvp.Invitation.Guests {
+            rsvp.Invitation.Guests[i].NormalizeName()
+            rsvp.Invitation.Guests[i].InviteID = rsvp.Invitation.ID
+        }
+        // Handle the email
+        rsvp.Invitation.ProcessEmail()
+        
+        // Verify that the POST is legal
+        err = models.GetNonce(&rsvp.Invitation, &rsvp.HMAC)
+        if err != nil {
+            ErrorResponseWithPayload(w, http.StatusBadRequest)
+            return
+        }
+        // Store the rsvp reply
+        err = models.UpdateInvite(&rsvp.Invitation, &rsvp.HMAC)
+        if err != nil {
+            ErrorResponseWithPayload(w, http.StatusInternalServerError)
+            return
+        }
+        CodeResponse(w, http.StatusOK)
     }
 }

@@ -127,7 +127,7 @@ func sendEmails(emails []models.Email) {
 }
 
 func sendConfirmEmail(em *models.Email) error {
-    i, err := models.GetInviteeByID(em.InviteeID)
+    i, err := models.GetInviteeByID(em.InviteID)
     if err != nil {
         return err
     }

@@ -3,6 +3,7 @@ package models
 import (
     "log"
     "os"
+    "time"
 
     "github.com/abstractthis/gowedding/config"
     _ "github.com/mattn/go-sqlite3"
@@ -41,14 +42,52 @@ func Initialize() error {
 
 func seedTables() error {
     Logger.Print("Building out tables...")
+    stamp := time.Now()
     i := &Invite{
         ID:     2323,
         Guests: []Guest{
             {First: "david", Last: "smith", IsAttending: false,},
             {First: "duong", Last: "nguyen", IsAttending: false,},
         },
+        UpdatedAt: stamp,
     }
     err := db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+    stamp = time.Now()
+    i = &Invite{
+        ID:     3,
+        Guests: []Guest{
+            {First: "farid", Last: "ansari", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+    stamp = time.Now()
+    i = &Invite{
+        ID:     4,
+        Guests: []Guest{
+            {First: "jenny", Last: "wu", IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
     return err
 }
 

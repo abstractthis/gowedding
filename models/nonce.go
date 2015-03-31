@@ -10,7 +10,7 @@ import (
 )
 
 const (
-    Expiration = 60 * 10
+    Expiration = 60 * 10 // seconds
 )
 
 type Nonce struct {
@@ -23,19 +23,22 @@ var action = "RSVP to duong and dave wedding"
 var ErrNonceExpired = errors.New("Expired Nonce")
 var ErrNonceMismatch = errors.New("Nonce Mismatch")
 
-func GetNonce(i *Invitee, hmac *Nonce) error {
+func GetNonce(i *Invite, hmac *Nonce) error {
     err := db.Where("hash=? and stamp=?", hmac.Hash, hmac.Stamp).Find(hmac).Error
     if err != nil {
+        Logger.Printf("404 HMAC --> %v\n", err)
         return err
     }
     // Check that the nonce hasn't expired
     ts := time.Now().Unix()
     if ts - hmac.Stamp > Expiration {
+        Logger.Println("HMAC has expired!")
         return ErrNonceExpired
     }
     // Build out hash with information and verify they're the same
-    hash := calcNonceHash(i.InviteID, i.First1, i.Last1, hmac.Stamp)
+    hash := calcNonceHash(i.ID, i.Guests[0].First, i.Guests[0].Last, hmac.Stamp)
     if hash != hmac.Hash {
+        Logger.Println("HMAC != HMAC!")
         return ErrNonceMismatch
     }
     return nil
@@ -48,10 +51,9 @@ func GetNonceByPath(idStr string, first string, last string, hash string, stamp 
         Logger.Println("Failed to convert invite id!")
         return n, err
     }
-    i := Invitee{
-        InviteID: id,
-        First1:   first,
-        Last1:    last,
+    i := Invite{
+        ID:     id,
+        Guests: []Guest{{InviteID: id, First: first, Last: last},},
     }
     ts, err := strconv.ParseInt(stamp, 10, 64)
     if err != nil {

@@ -2,7 +2,7 @@ package models
 
 type Email struct {
     ID        int
-    InviteeID int
+    InviteID  int
     Address   string `sql:"type:varchar(100);not null"`
     Type      string `sql:"type:varchar(16)"`
     Sent      bool

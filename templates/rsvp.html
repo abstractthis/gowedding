@@ -16,7 +16,7 @@
         
         {{ range $i, $g := .Invitation.Guests }}
             {{ if eq $i 0 }}
-                <div id="guestBox{{$i}}">
+                <div id="guestBox{{$i}}" class="guestInfo">
                     <div class="form-group">
                         <input type="text" name="Invitation.Guests.{{$i}}.First" id="gFirst{{$i}}" size="30" value="{{fullName $g.First $g.Last}}" placeholder="Name" class="text-input form-control" readonly="true" />
                     </div>
@@ -41,9 +41,9 @@
                     </div>
                 </div>
             {{ else }}
-                <div id="guestBox{{$i}}" style="display:none">
+                <div id="guestBox{{$i}}" class="guestInfo" style="display:none">
                     <div class="form-group">
-                        <input type="text" name="Invitation.Guests.{{$i}}.First" id="gFirst{{$i}}" size="30" value="{{fullName $g.First $g.Last}}" placeholder="Name" class="text-input form-control" />
+                        <input type="text" name="Invitation.Guests.{{$i}}.First" id="gFirst{{$i}}" size="30" value="{{fullName $g.First $g.Last}}" placeholder="Name" class="text-input form-control" {{if $g.First}}readonly="true"{{ end }} />
                         <label class="error" for="Invitation.Guests.{{$i}}.First" id="error-gFirst{{$i}}">Please provide the first and last name.</label>
                     </div>
 

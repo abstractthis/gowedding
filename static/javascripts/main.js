@@ -37,6 +37,7 @@
 			e.stopPropagation();
 		});
 
+		var validate = false;
 		var intRegex = /^\d+$/;
 
 		var validateRSVPLookup = function() {
@@ -183,7 +184,7 @@
 					$("#error-food" + selectIndex).hide();
 				}
 			}
-			validateRSVPReply();
+			if (validate) validateRSVPReply();
 		});
 
 		$("#rsvpwrap").on("focus", ".text-input, select", function () {
@@ -247,13 +248,39 @@
 			});
 		});
 
+		var getRSVPPostData = function(form) {
+			var allData = form.serializeArray();
+			var completedData = [];
+			// Need to keep the hidden values and the email so grab them first
+			for (var i = 0; i < allData.length; i++) {
+				var lowerName = (allData[i].name).toLowerCase();
+				if (lowerName === "invitation.id" || lowerName === "hmac.hash" ||
+					lowerName === "hmac.stamp" || lowerName === "invitation.confirmaddr.address") {
+					completedData.push(allData[i]);
+				}
+			}
+			// Grab guest values for those guest that info was provided
+			$(".guestInfo").each(function(i) {
+				var guestName = $.trim($("#gFirst" + i).val());
+				if (guestName !== "") {
+					var guestValues = allData.filter(function(elem) {
+						var lowerName = (elem.name).toLowerCase();
+						return lowerName.startsWith("invitation.guests." + i);
+					});
+					completedData.push.apply(completedData, guestValues);
+				}
+			});
+			return ($.param(completedData)).toLowerCase();
+		};
+
 		$("#rsvpwrap").on("submit", "#rsvp-reply", function(e) {
 			e.preventDefault();
 			var validForm = validateRSVPReply();
+			validate = !validForm;
 			if (!validForm) return;
 			$("#reply-submit-btn").prop("disabled", true);
 			var form = $(this);
-			var postData = form.serialize().toLowerCase();
+			var postData = getRSVPPostData(form);
 			$.ajax({
 				url: form.attr("action"),
 				type: form.attr("method"),
