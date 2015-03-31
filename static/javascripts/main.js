@@ -267,7 +267,7 @@
 						var lowerName = (elem.name).toLowerCase();
 						return lowerName.startsWith("invitation.guests." + i);
 					});
-					completedData.push.apply(completedData, guestValues);
+					Array.prototype.push.apply(completedData, guestValues);
 				}
 			});
 			return ($.param(completedData)).toLowerCase();

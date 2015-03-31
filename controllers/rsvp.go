@@ -41,17 +41,12 @@ func Respondez(w http.ResponseWriter, r *http.Request) {
             ErrorResponseWithPayload(w, http.StatusNotFound)
             return
         }
-        // Hack for our couple NO guest peeps
-        // if invitee.InviteID == 34 || invitee.InviteID == 35 || marciel {
-        //     invitee.NoGuest = true
-        // } else {
-        //     invitee.NoGuest = false
-        // }
+        
         rsvp := &RSVP{
             Invitation: invite,
             HMAC:       n,
         }
-        t := template.Must(template.New("rsvp.html").Funcs(template.FuncMap{"sum" : sum, "fullName" : FullName}).ParseFiles("templates/rsvp.html"))
+        t := template.Must(template.New("rsvp.html").Funcs(template.FuncMap{"sum" : Sum, "fullName" : FullName}).ParseFiles("templates/rsvp.html"))
         t.Execute(w, rsvp)
     case r.Method == "POST":
         // Parse the form data
@@ -88,12 +83,6 @@ func Respondez(w http.ResponseWriter, r *http.Request) {
     }
 }
 
-/*
- * Used in the template for rendering Guest pagination values.
- */
-func sum(x, y int) int {
-    return x + y
-}
 
 func RSVP_Reply(w http.ResponseWriter, r *http.Request) {
     switch {

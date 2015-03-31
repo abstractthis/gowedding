@@ -20,7 +20,7 @@ import (
  func main() {
     // Launch the emailer
     emailSender = emailer.New()
-    // emailSender.Start()
+    emailSender.Start()
 
     // Spin up goroutine to listen and deal with Ctrl-C
     // Actually listens for SIGINT, SIGKILL and SIGTERM

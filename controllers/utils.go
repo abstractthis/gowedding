@@ -76,3 +76,10 @@ func FullName(first string, last string) string {
     last = FirstLetterUpper(last)
     return first + " " + last
 }
+
+/*
+ * Used in the template for rendering Guest pagination values.
+ */
+func Sum(x, y int) int {
+    return x + y
+}
