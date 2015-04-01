@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+    "time"
+    "unicode"
+)
 
 type Invite struct {
     ID          int     `gorm:"primary_key" sql:"index"`
@@ -15,6 +18,23 @@ func (i *Invite) ProcessEmail() {
     } else {
         i.ConfirmAddr.Type = "confirm"
     }
+}
+
+func (i *Invite) FormatForEmail() {
+    for j, g := range i.Guests {
+        i.Guests[j].First = firstLetterUpper(g.First)
+        i.Guests[j].Last = firstLetterUpper(g.Last)
+        if g.IsAttending {
+            i.Guests[j].Food = firstLetterUpper(g.Food)
+        }
+    }
+}
+
+func firstLetterUpper(str string) string {
+    for i, v := range str {
+        return string(unicode.ToUpper(v)) + str[i+1:]
+    }
+    return ""
 }
 
 func GetInviteByID(id int) (Invite, error) {

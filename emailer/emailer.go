@@ -8,10 +8,10 @@ import (
     "os"
     "text/template"
     "time"
+    "errors"
 
     "github.com/abstractthis/gowedding/models"
     "github.com/abstractthis/gowedding/config"
-    "github.com/abstractthis/gowedding/controllers"
 
     "github.com/jordan-wright/email"
 )
@@ -24,6 +24,8 @@ var delayCeilingSec int64
 var batchCount int
 var fullHostAddr string
 var auth smtp.Auth
+
+var ErrUnknownEmailType = errors.New("Unknown Email Type")
 
 type Emailer struct {
     shutdown  chan bool
@@ -108,8 +110,16 @@ func discoverEmails() {
 func sendEmails(emails []models.Email) {
     emailCount := len(emails)
     if emailCount > 0 {
+        var err error
         for i, email := range emails {
-            if err := sendConfirmEmail(&email); err == nil {
+            if email.Type == "confirm" {
+                err = sendConfirmEmail(&email)
+            } else if email.Type == "oops" {
+                err = sendOopsEmail(&email)
+            } else {
+                err = ErrUnknownEmailType
+            }
+            if err == nil {
                 email.Sent = true
                 models.UpdateEmail(&email)
             }
@@ -127,11 +137,11 @@ func sendEmails(emails []models.Email) {
 }
 
 func sendConfirmEmail(em *models.Email) error {
-    i, err := models.GetInviteeByID(em.InviteID)
+    i, err := models.GetInviteByID(em.InviteID)
     if err != nil {
         return err
     }
-    formatInvitee(&i)
+    i.FormatForEmail()
     t, err := template.ParseFiles("templates/email/confirmation")
     if err != nil {
         Logger.Println("Template Parse failure: email/confirmation")
@@ -140,8 +150,7 @@ func sendConfirmEmail(em *models.Email) error {
     var textBuff bytes.Buffer
     err = t.Execute(&textBuff, &i)
     if err != nil {
-        Logger.Println("Failed to execute template: email/confirmation")
-        Logger.Println(err)
+        Logger.Printf("Failed to execute template: email/confirmation --> %v\n", err)
         return err
     }
     e := email.Email{
@@ -155,28 +164,25 @@ func sendConfirmEmail(em *models.Email) error {
     return nil
 }
 
-// Should the emailer really know how to format the input?
-func formatInvitee(i *models.Invitee) {
-    i.First1 = controllers.FirstLetterUpper(i.First1)
-    i.Last1 = controllers.FirstLetterUpper(i.Last1)
-    if i.IsAttending1 {
-        i.Food1 = controllers.FirstLetterUpper(i.Food1)
+func sendOopsEmail(em *models.Email) error {
+    t, err := template.ParseFiles("templates/email/oops.html")
+    if err != nil {
+        Logger.Printf("Template Parse failure: email/oops.html --> %v\n", err)
+        return err
     }
-    if i.First2 != "" {
-        i.First2 = controllers.FirstLetterUpper(i.First2)
-        i.Last2 = controllers.FirstLetterUpper(i.Last2)
+    var textBuff bytes.Buffer
+    err = t.Execute(&textBuff, nil)
+    if err != nil {
+        Logger.Printf("Failed to execute template: email/oops.html --> %v\n", err)
+        return err
     }
-    if i.IsAttending2 {
-        i.Food2 = controllers.FirstLetterUpper(i.Food2)
+    e := email.Email{
+        Subject: "Please RSVP Again for Duong and David Wedding",
+        From:    "duonganddave@gmail.com",
+        To:      []string{em.Address},
+        Cc:      []string{"duonganddave@gmail.com"},
     }
-    // Logger.Printf("Date First = %s\n", i.Date.First)
-    // Logger.Printf("Date Last = %s\n", i.Date.Last)
-    // Logger.Printf("Date Food = %s\n", i.Date.Food)
-    // Handle Guest
-    if i.Date != nil {
-        Logger.Println("############# blah #############")
-        i.Date.First = controllers.FirstLetterUpper(i.Date.First)
-        i.Date.Last = controllers.FirstLetterUpper(i.Date.Last)
-        i.Date.Food = controllers.FirstLetterUpper(i.Date.Food)
-    }
+    e.HTML = textBuff.Bytes()
+    e.Send(fullHostAddr, auth)
+    return nil
 }

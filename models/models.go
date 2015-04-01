@@ -28,7 +28,6 @@ func Initialize() error {
     // If the file doesn't exist create it and build out DB
     if _, err := os.Stat(config.Conf.DBPath); os.IsNotExist(err) {
         Logger.Printf("Database not found... creating db at %s\n", config.Conf.DBPath)
-        // db.CreateTable(&Invitee{})
         db.CreateTable(&Invite{})
         db.CreateTable(&Guest{})
         db.CreateTable(&Nonce{})
