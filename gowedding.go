@@ -11,15 +11,21 @@ import (
     "github.com/abstractthis/gowedding/routes"
     "github.com/abstractthis/gowedding/models"
     "github.com/abstractthis/gowedding/emailer"
+    "github.com/abstractthis/gowedding/stats"
 )
 
  var Logger = log.New(os.Stdout, " ", log.Ldate|log.Ltime|log.Lshortfile)
  var emailSender *emailer.Emailer
+ var statsCruncher *stats.Cruncher
 
  func main() {
     // Launch the emailer
     emailSender = emailer.New()
     emailSender.Start()
+
+    // Launch stats cruncher
+    statsCruncher = stats.New()
+    statsCruncher.Start()
 
     // Spin up goroutine to listen and deal with Ctrl-C
     // Actually listens for SIGINT, SIGKILL and SIGTERM
@@ -30,6 +36,7 @@ import (
         select {
         case <-sigChan:
             Logger.Printf("Program interrupt received! Cleanup...")
+            statsCruncher.Stop()
             emailSender.Stop()
             Logger.Println("cleanup complete.")
             os.Exit(1)
@@ -50,7 +57,8 @@ import (
     http.ListenAndServe(config.Conf.ApiURL,
         handlers.CombinedLoggingHandler(os.Stdout, routes.CreateWeddingRouter(config.Conf.IsDev)))
 
-    // Shutdown emailer on normal exit
+    // Cleanup on normal exit
+    statsCruncher.Stop()
     emailSender.Stop()
     // Stop the goroutine listening for interrupt signals
     stopSig <- true

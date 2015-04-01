@@ -1,0 +1,17 @@
+
+*~~~ Guest Counts ~~~*
+Total Guests         : {{ .Total }}
+Guests Attending     : {{ .Attending }}
+Guests Not Attending : {{ .NotAttending }}
+
+
+*~~~ Dinner Selections ~~~*
+Beef   : {{ .Beef }}
+Fish   : {{ .Fish }}
+Veggie : {{ .Veggie }}
+Total  : {{ .AllDinner }}
+
+
+*~~~ Waiting to Hear From ~~~*
+{{ range $i, $p := .Outstanding }}{{ $p.InviteID }} -- {{ $p.First }} {{ $p.Last }}
+{{ end }}

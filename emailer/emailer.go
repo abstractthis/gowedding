@@ -9,9 +9,11 @@ import (
     "text/template"
     "time"
     "errors"
+    "strings"
 
     "github.com/abstractthis/gowedding/models"
     "github.com/abstractthis/gowedding/config"
+    "github.com/abstractthis/gowedding/stats"
 
     "github.com/jordan-wright/email"
 )
@@ -116,6 +118,8 @@ func sendEmails(emails []models.Email) {
                 err = sendConfirmEmail(&email)
             } else if email.Type == "oops" {
                 err = sendOopsEmail(&email)
+            } else if strings.HasPrefix(email.Type, "stats") {
+                err = sendStatsEmail(&email)
             } else {
                 err = ErrUnknownEmailType
             }
@@ -158,6 +162,34 @@ func sendConfirmEmail(em *models.Email) error {
         From:    "duonganddave@gmail.com",
         To:      []string{em.Address},
         Cc:      []string{"duonganddave@gmail.com"},
+    }
+    e.Text = textBuff.Bytes()
+    e.Send(fullHostAddr, auth)
+    return nil
+}
+
+func sendStatsEmail(em *models.Email) error {
+    stats, err := stats.EmailContent(em.Type)
+    if err != nil {
+        Logger.Printf("Failed to obtain Stats! --> %v\n", err)
+        return err
+    }
+    t, err := template.ParseFiles("templates/email/stats")
+    if err != nil {
+        Logger.Println("Template Parse failure: email/stats")
+        return err
+    }
+    var textBuff bytes.Buffer
+    err = t.Execute(&textBuff, &stats)
+    if err != nil {
+        Logger.Printf("Failed to execute template: email/stats --> %v\n", err)
+        return err
+    }
+    e := email.Email{
+        Subject: "D&D Wedding Statistics",
+        From:    "duonganddave@gmail.com",
+        To:      []string{em.Address},
+        Cc:      []string{"missduongnguyen@gmail.com"},
     }
     e.Text = textBuff.Bytes()
     e.Send(fullHostAddr, auth)
