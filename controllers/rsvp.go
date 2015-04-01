@@ -2,7 +2,6 @@ package controllers
 
 import (
     "net/http"
-    "net/url"
     "strings"
     "strconv"
     "html/template"
@@ -24,8 +23,8 @@ func Respondez(w http.ResponseWriter, r *http.Request) {
     case r.Method == "GET":
         pathVars := mux.Vars(r)
         id := pathVars["id"]
-        firstName, _ := url.QueryUnescape(pathVars["first"])
-        lastName, _ := url.QueryUnescape(pathVars["last"])
+        firstName := pathVars["first"]
+        lastName := pathVars["last"]
         nonce := pathVars["nonce"]
         stamp := pathVars["stamp"]
         // Check for a valid nonce
@@ -78,7 +77,7 @@ func Respondez(w http.ResponseWriter, r *http.Request) {
         }
         inviteId := strconv.Itoa(guest.InviteID)
         stampStr := strconv.FormatInt(nonce.Stamp, 10)
-        queryPath := []string{"/rsvp", inviteId, url.QueryEscape(guest.First), url.QueryEscape(guest.Last), nonce.Hash, stampStr}
+        queryPath := []string{"/rsvp", inviteId, guest.First, guest.Last, nonce.Hash, stampStr}
         CreateResponse(w, strings.ToLower(strings.Join(queryPath, "/")))
     }
 }

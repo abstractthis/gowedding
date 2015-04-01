@@ -16,7 +16,7 @@ func CreateWeddingRouter(serveStatic bool) http.Handler {
     Logger.Println("Creating Wedding Router...")
     router := mux.NewRouter()
     router.StrictSlash(true)
-    router.HandleFunc("/rsvp/{id:[0-9]+}/{first:[a-z]+}/{last:[a-z]+}/{nonce:[a-z0-9]{40}}/{stamp:[0-9]+}/", controllers.Respondez).Methods("GET")
+    router.HandleFunc("/rsvp/{id:[0-9]+}/{first:[a-z-]+}/{last:[a-z-]+}/{nonce:[a-z0-9]{40}}/{stamp:[0-9]+}/", controllers.Respondez).Methods("GET")
     router.HandleFunc("/rsvp/", controllers.Respondez).Methods("POST")
     router.HandleFunc("/rsvp/reply/", controllers.RSVP_Reply).Methods("POST")
 

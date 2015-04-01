@@ -8,6 +8,7 @@ import (
     "encoding/json"
     "unicode"
     "html/template"
+    "strings"
 )
 
 var Logger = log.New(os.Stdout, " ", log.Ldate|log.Ltime|log.Lshortfile)
@@ -68,12 +69,26 @@ func FirstLetterUpper(str string) string {
     return ""
 }
 
+func CapIt(s string) string {
+    // Deal with hyphenated names first
+    hyphenChop := strings.Split(s, "-")
+    if len(hyphenChop) > 1 {
+        name := make([]string, len(hyphenChop))
+        for i, partial := range hyphenChop {
+            name[i] = FirstLetterUpper(partial)
+        }
+        return strings.Join(name, "-")
+    } else {
+        return FirstLetterUpper(s)
+    }
+}
+
 func FullName(first string, last string) string {
     if first == "" && last == "" {
         return ""
     }
-    first = FirstLetterUpper(first)
-    last = FirstLetterUpper(last)
+    first = CapIt(first)
+    last = CapIt(last)
     return first + " " + last
 }
 

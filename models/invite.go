@@ -3,6 +3,7 @@ package models
 import (
     "time"
     "unicode"
+    "strings"
 )
 
 type Invite struct {
@@ -22,8 +23,8 @@ func (i *Invite) ProcessEmail() {
 
 func (i *Invite) FormatForEmail() {
     for j, g := range i.Guests {
-        i.Guests[j].First = firstLetterUpper(g.First)
-        i.Guests[j].Last = firstLetterUpper(g.Last)
+        i.Guests[j].First = capIt(g.First)
+        i.Guests[j].Last = capIt(g.Last)
         if g.IsAttending {
             i.Guests[j].Food = firstLetterUpper(g.Food)
         }
@@ -35,6 +36,20 @@ func firstLetterUpper(str string) string {
         return string(unicode.ToUpper(v)) + str[i+1:]
     }
     return ""
+}
+
+func capIt(s string) string {
+    // Deal with hyphenated names first
+    hyphenChop := strings.Split(s, "-")
+    if len(hyphenChop) > 1 {
+        name := make([]string, len(hyphenChop))
+        for i, partial := range hyphenChop {
+            name[i] = firstLetterUpper(partial)
+        }
+        return strings.Join(name, "-")
+    } else {
+        return firstLetterUpper(s)
+    }
 }
 
 func GetInviteByID(id int) (Invite, error) {

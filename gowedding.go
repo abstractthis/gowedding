@@ -5,7 +5,6 @@ import (
     "net/http"
     "os"
     "os/signal"
-    // "syscall"
 
     "github.com/gorilla/handlers"
     "github.com/abstractthis/gowedding/config"

@@ -17,10 +17,11 @@ type SMTPServer struct {
 
 // Config represents the configuration information.
 type Config struct {
-    ApiURL string     `json:"api_url"`
-    SMTP   SMTPServer `json:"smtp"`
-    DBPath string     `json:"dbpath"`
-    IsDev  bool       `json:"is_dev"`
+    ApiURL   string     `json:"api_url"`
+    SMTP     SMTPServer `json:"smtp"`
+    DBPath   string     `json:"dbpath"`
+    IsDev    bool       `json:"is_dev"`
+    SendOops bool       `json:"send_oops"`
 }
 
 var Conf Config

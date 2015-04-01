@@ -10,7 +10,7 @@ import (
 )
 
 const (
-    Expiration = 60 * 10 // seconds
+    Expiration = 60 * 10 // 10 minutes
 )
 
 type Nonce struct {
@@ -36,12 +36,14 @@ func GetNonce(i *Invite, hmac *Nonce) error {
         return ErrNonceExpired
     }
     // Build out hash with information and verify they're the same
-    hash := calcNonceHash(i.ID, i.Guests[0].First, i.Guests[0].Last, hmac.Stamp)
-    if hash != hmac.Hash {
-        Logger.Println("HMAC != HMAC!")
-        return ErrNonceMismatch
+    for _, g := range i.Guests {
+        hash := calcNonceHash(i.ID, g.First, g.Last, hmac.Stamp)
+        if hash == hmac.Hash {
+            return nil
+        }
     }
-    return nil
+    Logger.Println("HMAC != HMAC!")
+    return ErrNonceMismatch
 }
 
 func GetNonceByPath(idStr string, first string, last string, hash string, stamp string) (Nonce, error) {

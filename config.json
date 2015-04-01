@@ -7,5 +7,6 @@
         "user" : "duonganddave@gmail.com",
         "pass" : "23evilSneeze!"
     },
-    "is_dev" : true
+    "is_dev" : true,
+    "send_oops" : true
 }
