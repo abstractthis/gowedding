@@ -1283,5 +1283,19 @@ func seedTables() error {
     }
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
 
+    i = &Invite{
+        ID:     301,
+        Guests: []Guest{
+            {First: "trinh", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
     return err
 }
