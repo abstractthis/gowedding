@@ -784,5 +784,504 @@ func seedTables() error {
     }
     Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
 
+    i = &Invite{
+        ID:     52,
+        Guests: []Guest{
+            {First: "mandie", Last: "nguyen", IsAttending: false,},
+            {First: "minh", Last: "nguyen", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     53,
+        Guests: []Guest{
+            {First: "diem", Last: "nguyen", IsAttending: false,},
+            {First: "binh", Last: "nguyen", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     101,
+        Guests: []Guest{
+            {First: "hang", Last: "nguyen", IsAttending: false,},
+            {First: "hai", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     102,
+        Guests: []Guest{
+            {First: "elizabeth", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     103,
+        Guests: []Guest{
+            {First: "kim", Last: "nguyen", IsAttending: false,},
+            {First: "ken", Last: "luu", IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     104,
+        Guests: []Guest{
+            {First: "duyen", Last: "nguyen", IsAttending: false,},
+            {First: "hoang", Last: "tran", IsAttending: false,},
+            {First: "audrey", Last: "tran", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     105,
+        Guests: []Guest{
+            {First: "trang", Last: "nguyen", IsAttending: false,},
+            {First: "eli", Last: "wheeler", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     106,
+        Guests: []Guest{
+            {First: "huy", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     107,
+        Guests: []Guest{
+            {First: "anh", Last: "dinh", IsAttending: false,},
+            {First: "kaylee", Last: "luong", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     108,
+        Guests: []Guest{
+            {First: "kinh", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     109,
+        Guests: []Guest{
+            {First: "hung", Last: "nguyen", IsAttending: false,},
+            {First: "judy", Last: "tang", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     110,
+        Guests: []Guest{
+            {First: "dziem", Last: "nguyen", IsAttending: false,},
+            {First: "duong", Last: "hoang", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     111,
+        Guests: []Guest{
+            {First: "huynh", Last: "nguyen", IsAttending: false,},
+            {First: "tan", Last: "nguyen", IsAttending: false,},
+            {First: "thang", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     112,
+        Guests: []Guest{
+            {First: "kathy", Last: "nguyen", IsAttending: false,},
+            {First: "rob", Last: "petterson", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     113,
+        Guests: []Guest{
+            {First: "thao", Last: "tran", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     114,
+        Guests: []Guest{
+            {First: "quyen", Last: "le", IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     115,
+        Guests: []Guest{
+            {First: "cuong", Last: "tran", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     116,
+        Guests: []Guest{
+            {First: "toan", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     117,
+        Guests: []Guest{
+            {First: "ha", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     118,
+        Guests: []Guest{
+            {First: "nang", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     119,
+        Guests: []Guest{
+            {First: "lien", Last: "thach", IsAttending: false,},
+            {First: "thuong", Last: "thach", IsAttending: false,},
+            {First: "teena", Last: "thach", IsAttending: false,},
+            {First: "james", Last: "thach", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     120,
+        Guests: []Guest{
+            {First: "hung", Last: "tran", IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     121,
+        Guests: []Guest{
+            {First: "mylinh", Last: "nguyen", IsAttending: false,},
+            {First: "tony", Last: "tran", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     122,
+        Guests: []Guest{
+            {First: "jessica", Last: "nguyen", IsAttending: false,},
+            {First: "joe", Last: "tran", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     123,
+        Guests: []Guest{
+            {First: "huy", Last: "tran", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     124,
+        Guests: []Guest{
+            {First: "trung", Last: "vu", IsAttending: false,},
+            {First: "katrina", Last: "vu", IsAttending: false,},
+            {First: "john", Last: "vu", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     125,
+        Guests: []Guest{
+            {First: "thanh", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     126,
+        Guests: []Guest{
+            {First: "hun", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     127,
+        Guests: []Guest{
+            {First: "huong", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     129,
+        Guests: []Guest{
+            {First: "ngoc", Last: "tran", IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     132,
+        Guests: []Guest{
+            {First: "rosemary", Last: "nguyen", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     133,
+        Guests: []Guest{
+            {First: "alyssa", Last: "nguyen", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     135,
+        Guests: []Guest{
+            {First: "thai", Last: "la", IsAttending: false,},
+            {IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
+    i = &Invite{
+        ID:     139,
+        Guests: []Guest{
+            {First: "lam", Last: "le", IsAttending: false,},
+        },
+        UpdatedAt: stamp,
+    }
+    err = db.Create(&i).Error
+    if err != nil {
+        return err
+    }
+    Logger.Printf("*~~ Invite %d inserted ~~*\n", i.ID)
+
     return err
 }
