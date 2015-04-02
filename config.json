@@ -2,11 +2,11 @@
     "api_url" : "localhost:9023",
     "dbpath" : "wedding2.db",
     "smtp" : {
-        "host" : "smtp.gmail.com",
+        "host" : "mail.dreamhost.com",
         "port" : "587",
-        "user" : "duonganddave@gmail.com",
-        "pass" : "23evilSneeze!"
+        "user" : "ddwedding@abstractthis.com",
+        "pass" : "happyDay52315!"
     },
     "is_dev" : true,
-    "send_oops" : true
+    "send_oops" : false
 }
