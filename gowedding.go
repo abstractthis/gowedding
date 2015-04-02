@@ -5,6 +5,7 @@ import (
     "net/http"
     "os"
     "os/signal"
+    "syscall"
 
     "github.com/gorilla/handlers"
     "github.com/abstractthis/gowedding/config"
@@ -32,7 +33,7 @@ import (
     sigChan := make(chan os.Signal, 2)
     stopSig := make(chan bool)
     go func() {
-        signal.Notify(sigChan, os.Interrupt)
+        signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
         select {
         case <-sigChan:
             Logger.Printf("Program interrupt received! Cleanup...")
