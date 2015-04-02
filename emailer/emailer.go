@@ -116,12 +116,22 @@ func sendEmails(emails []models.Email) {
         for i, email := range emails {
             if email.Type == "confirm" {
                 err = sendConfirmEmail(&email)
+                if err == nil {
+                    Logger.Println("Sent confirmation email.")
+                }
             } else if email.Type == "oops" {
                 err = sendOopsEmail(&email)
+                if err == nil {
+                    Logger.Println("Sent oops email.")
+                }
             } else if strings.HasPrefix(email.Type, "stats") {
                 err = sendStatsEmail(&email)
+                if err == nil {
+                    Logger.Println("Sent stats email.")
+                }
             } else {
                 err = ErrUnknownEmailType
+                Logger.Println("Unknown email type found.")
             }
             if err == nil {
                 email.Sent = true
@@ -159,13 +169,16 @@ func sendConfirmEmail(em *models.Email) error {
     }
     e := email.Email{
         Subject: "D&D Wedding RSVP Confirmation",
-        From:    "duonganddave@gmail.com",
+        From:    "no-reply@abstractthis.com",
         To:      []string{em.Address},
         Cc:      []string{"duonganddave@gmail.com"},
     }
     e.Text = textBuff.Bytes()
-    e.Send(fullHostAddr, auth)
-    return nil
+    err = e.Send(fullHostAddr, auth)
+    if err != nil {
+        Logger.Printf("Failed to send confirm email! --> %v\n", err)
+    }
+    return err
 }
 
 func sendStatsEmail(em *models.Email) error {
@@ -187,13 +200,16 @@ func sendStatsEmail(em *models.Email) error {
     }
     e := email.Email{
         Subject: "D&D Wedding Statistics",
-        From:    "duonganddave@gmail.com",
+        From:    "no-reply@abstractthis.com",
         To:      []string{em.Address},
         Cc:      []string{"missduongnguyen@gmail.com"},
     }
     e.Text = textBuff.Bytes()
-    e.Send(fullHostAddr, auth)
-    return nil
+    err = e.Send(fullHostAddr, auth)
+    if err != nil {
+        Logger.Printf("Failed to send stats email! --> %v\n", err)
+    }
+    return err
 }
 
 func sendOopsEmail(em *models.Email) error {
@@ -210,11 +226,14 @@ func sendOopsEmail(em *models.Email) error {
     }
     e := email.Email{
         Subject: "Please RSVP Again for Duong and David Wedding",
-        From:    "duonganddave@gmail.com",
+        From:    "no-reply@abstractthis.com",
         To:      []string{em.Address},
         Cc:      []string{"duonganddave@gmail.com"},
     }
     e.HTML = textBuff.Bytes()
-    e.Send(fullHostAddr, auth)
-    return nil
+    err = e.Send(fullHostAddr, auth)
+    if err != nil {
+        Logger.Printf("Failed to send oops email! --> %v\n", err)
+    }
+    return err
 }
