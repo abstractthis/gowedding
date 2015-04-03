@@ -74,10 +74,11 @@ func UpdateInvite(i *Invite, n *Nonce) error {
         Logger.Printf("Failed to delete invite hmac! --> %v\n", err)
         return err
     }
-    // Set values for the Guest
-    for j, _ := range i.Guests {
-        SetGuestID(&i.Guests[j])
+    err = SetGuestIDs(i)
+    if err != nil {
+        return err
     }
+
     i.UpdatedAt = time.Now()
     err = db.Debug().Save(i).Error
     if err != nil {

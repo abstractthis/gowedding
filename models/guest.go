@@ -25,12 +25,35 @@ func VerifyInviteByGuest(g *Guest) error {
     return err
 }
 
-func SetGuestID(g *Guest) error {
-    err := db.Where("invite_id=? and first=? and last=?", g.InviteID, g.First, g.Last).Select("id").Find(g).Error
+func SetGuestIDs(invite *Invite) error {
+    var dbGuests []Guest
+    err := db.Where("invite_id=?", invite.ID).Select("id", "first").Find(&dbGuests).Error
     if err != nil {
-        Logger.Printf("Failed to set guest id Guest{InviteID: %d, First: %s, Last: %s}\n", g.InviteID, g.First, g.Last)
+        Logger.Printf("Failed to set guests IDs for invite #%d!\n", invite.ID)
+        return err
     }
-    return err
+    for i, _ := range invite.Guests {
+        // Go through looking for matching first name
+        for _, dbGuest := range dbGuests {
+            if invite.Guests[i].First == dbGuest.First {
+                invite.Guests[i].ID = dbGuest.ID
+                break
+            }
+        }
+        // Cycle again if ID is 0 for an empty db guest (anonymous guest)
+        if invite.Guests[i].ID == 0 {
+            for j, dbGuest := range dbGuests {
+                if dbGuest.First == "" {
+                    // Use the ID for this anonymous guest
+                    invite.Guests[j].ID = dbGuest.ID
+                    // Set the first name of the db guest so its ID isn't used again.
+                    dbGuests[j].First = invite.Guests[j].First
+                    break
+                }
+            }
+        }
+    }
+    return nil
 }
 
 func TotalGuests() int32 {
