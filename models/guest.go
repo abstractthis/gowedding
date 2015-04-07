@@ -110,3 +110,12 @@ func VeggieDinners() int32 {
     return int32(veggie)
 }
 
+func KidDinners() int32 {
+    var kids int64
+    err := db.Model(&Guest{}).Where("invite_id<>? and food='kid'", 2323).Count(&kids).Error
+    if err != nil {
+        kids = -1
+    }
+    return int32(kids)
+}
+

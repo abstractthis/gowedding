@@ -9,6 +9,7 @@ Guests Not Attending : {{ .NotAttending }}
 Beef   : {{ .Beef }}
 Fish   : {{ .Fish }}
 Veggie : {{ .Veggie }}
+Kid    : {{ .Kid }}
 Total  : {{ .AllDinner }}
 
 

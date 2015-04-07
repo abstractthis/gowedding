@@ -40,6 +40,7 @@ type Stats struct {
     Beef         int32
     Fish         int32
     Veggie       int32
+    Kid          int32
     NoResponse   int32
     Outstanding  []MIA
 }
@@ -144,10 +145,12 @@ func calcDinnerSelections(s *Stats) {
     beefCount := models.BeefDinners()
     fishCount := models.FishDinners()
     veggieCount := models.VeggieDinners()
+    kidCount := models.KidDinners()
     s.Beef = beefCount
     s.Fish = fishCount
     s.Veggie = veggieCount
-    s.AllDinner = beefCount + fishCount + veggieCount
+    s.Kid = kidCount
+    s.AllDinner = beefCount + fishCount + veggieCount + kidCount
 }
 
 func calcMIA(s *Stats) {
